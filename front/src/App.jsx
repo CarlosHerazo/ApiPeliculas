@@ -1,4 +1,4 @@
-import { Container, CircularProgress } from "@mui/material";
+import { Container, CircularProgress, Box } from "@mui/material";
 import NavBar from "./components/NavBar/NavBar";
 import { Route, Routes } from "react-router-dom";
 import Inicio from "./views/Inicio";
@@ -11,7 +11,7 @@ import DetallesPelis from "./views/DetallesPelis";
 
 function App() {
   const [peliculas, setPeliculas] = useState(null);
-  const [tentencias, setTendencias] = useState(null);
+  const [tendencias, setTendencias] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const getMovies = async () => {
@@ -20,36 +20,31 @@ function App() {
       const data = await res.json();
       console.log(data);
       setPeliculas(data.results);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching movies:", error);
-      setLoading(false);
     }
   };
 
-  const getTendecnias = async () => {
+  const getTendencias = async () => {
     try {
       const res = await fetch('http://localhost:5000/movies/tendencias');
       const data = await res.json();
       console.log(data);
       setTendencias(data.results);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching movies:", error);
-      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getTendecnias();
+    const fetchData = async () => {
+      await getTendencias();
+      await getMovies();
+      setLoading(false);
+    };
+    
+    fetchData();
   }, []);
-
-
-  useEffect(() => {
-    getMovies();
-  }, []);
-
-
 
   const navList = [
     {
@@ -65,28 +60,31 @@ function App() {
       path: "categorias"
     }
   ];
-  
 
   return (
     <>
-      <NavBar navList={navList} />
-      <Container maxWidth="xl" sx={{ m: 0 }} disableGutters>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <MovieBanner Peliculas={peliculas} />
-        )}
-      </Container>
-      <Container sx={{ mt: 10 }} maxWidth="xl">
-        <Routes>
-          <Route path="/" element={<Inicio Peliculas={peliculas} />} />
-          <Route path="/inicio" element={<Inicio Peliculas={peliculas}/>} />
-          <Route path="/tendencias" element={<Tendencias PeliTendencias={tentencias}/>} />
-          <Route path="/categorias" element={<CategoriasPelis Peliculas={peliculas}/>} />
-          <Route path="/detalle/:id" element={<DetallesPelis />} />
-        </Routes>
-      </Container>
-      <Footer />
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' , color: 'warning'}}>
+          <CircularProgress color="warning" />
+        </Box>
+      ) : (
+        <>
+          <NavBar navList={navList} />
+          <Container maxWidth="xl" sx={{ m: 0 }} disableGutters>
+            <MovieBanner Peliculas={peliculas} />
+          </Container>
+          <Container sx={{ mt: 10 }} maxWidth="xl">
+            <Routes>
+              <Route path="/" element={<Inicio Peliculas={peliculas} />} />
+              <Route path="/inicio" element={<Inicio Peliculas={peliculas}/>} />
+              <Route path="/tendencias" element={<Tendencias PeliTendencias={tendencias}/>} />
+              <Route path="/categorias" element={<CategoriasPelis Peliculas={peliculas}/>} />
+              <Route path="/detalle/:id" element={<DetallesPelis />} />
+            </Routes>
+          </Container>
+          <Footer />
+        </>
+      )}
     </>
   );
 }

@@ -1,10 +1,11 @@
 import React from 'react'
 import BlueCard from '../components/BlueCard'
+import Typography from '@mui/material/Typography'
 
-function Tendencias({PeliTendencias}) {
+function Tendencias({ PeliTendencias }) {
   return (
     <>
-      <h1>tendencias</h1>
+      <Typography variant="h3" component="h1">Tendencias</Typography>
       <BlueCard Peliculas={PeliTendencias}></BlueCard>
 
     </>

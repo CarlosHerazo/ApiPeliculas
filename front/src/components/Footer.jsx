@@ -17,18 +17,12 @@ const Footer = () => {
         ¡Síguenos en las redes sociales!
       </Typography>
       <Box sx={{ display: 'flex', justifyContent: 'end', marginBottom: '15px' }}>
-        <Link href="https://twitter.com/ejemplo" color="inherit" sx={{ marginRight: '10px' }}>
-          Twitter
-        </Link>
-        <Link href="https://facebook.com/ejemplo" color="inherit" sx={{ marginRight: '10px' }}>
-          Facebook
-        </Link>
-        <Link href="https://instagram.com/ejemplo" color="inherit">
-          Instagram
+        <Link href="https://www.themoviedb.org/" color="inherit" sx={{ marginRight: '10px' }}>
+        The Movie Database (TMDB)
         </Link>
       </Box>
       <Typography variant="body2" gutterBottom>
-        Contáctanos: ejemplo@example.com
+        Contáctanos: Herazodev@gmail.com
       </Typography>
       <Typography variant="body2">
         © {new Date().getFullYear()} THEMOVIEBD. Todos los derechos reservados.

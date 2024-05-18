@@ -14,7 +14,7 @@ function NavBar({ navList }) {
 
     const handleScroll = () => {
         const offset = window.scrollY;
-        if (offset > 100) { 
+        if (offset > 100) {
             setScrolled(true);
         } else {
             setScrolled(false);
@@ -41,7 +41,23 @@ function NavBar({ navList }) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant='h5' sx={{ flexGrow: 1 }}>PeliHz
+                    <Typography
+                        variant="h5"
+                        component={NavLink}
+                        to="/"
+                        sx={{
+                            flexGrow: 1,
+                            textDecoration: "none",
+                            color: "inherit",
+                            '&:hover': {
+                                textDecoration: "underline",
+                            },
+                            '&.active': {
+                                fontWeight: "bold",
+                            },
+                        }}
+                    >
+                        PeliHz
                     </Typography>
 
                     <Box sx={{ display: { xs: "none", sm: "flex" } }}>
