@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Grid, Card, CardMedia, Typography, Box, Chip, Link, Modal, Fade, Button, Backdrop } from '@mui/material';
+import { Container, Grid, Card, CardMedia, Typography, Box, Chip, Link, Modal, Fade, Button, Backdrop, CircularProgress } from '@mui/material';
 import RatingCircle from '../components/RatingCircle';
 import MovieIcon from '@mui/icons-material/Movie';
 import TrailerYoutube from '../components/TrailerYoutube'; // Asegúrate de importar TrailerYoutube desde su ubicación correcta
@@ -33,7 +33,10 @@ export default function DetallesPelis() {
     }
 
     if (!pelicula) {
-        return <div>Cargando...</div>;
+        return <div>
+            <h1>Extrayendo informacion</h1>
+            <CircularProgress color="warning" />
+        </div>
     }
 
     const handleCloseModal = () => {
@@ -57,7 +60,7 @@ export default function DetallesPelis() {
                 if (data.results[i].name.includes("Official Trailer")) {
                     trailerKey = data.results[i].key;
                     break; // Termina el bucle una vez que se encuentra el trailer oficial
-                }else{
+                } else {
                     trailerKey = data.results[0].key;
                 }
             }
