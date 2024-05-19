@@ -42,7 +42,7 @@ function App() {
       await getMovies();
       setLoading(false);
     };
-    
+
     fetchData();
   }, []);
 
@@ -64,21 +64,23 @@ function App() {
   return (
     <>
       {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' , color: 'warning'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', color: 'warning' }}>
           <CircularProgress color="warning" />
         </Box>
       ) : (
         <>
           <NavBar navList={navList} />
-          <Container maxWidth="xl" sx={{ m: 0 }} disableGutters>
-            <MovieBanner Peliculas={peliculas} />
-          </Container>
+          <Box sx={{ width: '100%' }}>
+            <Container maxWidth={false} disableGutters sx={{ p: 0 }}>
+              <MovieBanner Peliculas={peliculas} />
+            </Container>
+          </Box>
           <Container sx={{ mt: 10 }} maxWidth="xl">
             <Routes>
               <Route path="/" element={<Inicio Peliculas={peliculas} />} />
-              <Route path="/inicio" element={<Inicio Peliculas={peliculas}/>} />
-              <Route path="/tendencias" element={<Tendencias PeliTendencias={tendencias}/>} />
-              <Route path="/categorias" element={<CategoriasPelis Peliculas={peliculas}/>} />
+              <Route path="/inicio" element={<Inicio Peliculas={peliculas} />} />
+              <Route path="/tendencias" element={<Tendencias PeliTendencias={tendencias} />} />
+              <Route path="/categorias" element={<CategoriasPelis Peliculas={peliculas} />} />
               <Route path="/detalle/:id" element={<DetallesPelis />} />
             </Routes>
           </Container>
