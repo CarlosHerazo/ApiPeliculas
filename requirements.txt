@@ -1,0 +1,5 @@
+Flask==3.0.3
+Flask-Cors==4.0.1 
+requests==2.32.3
+
+# crear un entornoVirtual y ejecutar este sarchivo // pip install -r requirements.txt
